@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <input id="num1" />
+
+    <div id="operatorBtns">
+        <button id="plus" onclick="operation='+'">+</button>
+        <button id="minus" onclick="operation='-'">-</button>
+        <button id="times" onclick="operation='*'">x</button>
+        <button id="divide" onclick="operation='/'">:</button>
+    </div>
+
+    <input id="num2" />
+    <br>
+
+    <button onclick="func()">Посчитать</button>
+
+    <p id="result"></p>
+
+/////////////////////////////
+    <div class="riddle">
+        <p>Зимой и летом одни цветом ?</p>
+        <button id="riddle1-button">Show Answer</button>
+        <p class="answer" id="riddle1-answer">Ёлка</p>
+    </div>
+
+
+
+</body>
+<script src="app.js"></script>
+</html>
