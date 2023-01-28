@@ -1,0 +1,29 @@
+
+body {
+    background-color: #1d2630;
+    height: 35%;
+    width: 570px;
+    position: absolute;
+    margin: auto;
+    top: 50px;
+    left: 0;
+    right: 0;
+    padding: 40px 0;
+    border-radius: 8px;
+}
+p {
+    font-family: "Comic Sans MS", sans-serif;
+    color: white;
+}
+button{
+    width: 150px;
+    height: 30px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 16px;
+    background: darkgreen;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
