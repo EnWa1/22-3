@@ -20,12 +20,12 @@ innCheck.onclick = () => {
 //Задание №2
 
 let position = 0;
-  function moveBlock() {
-    let smallBlock = document.getElementById("small-block");
-    smallBlock.style.left = `${position}px`;
+function moveBox() {
+    let box = document.querySelector('.box');
+    box.style.left = `${position}px`;
     position++;
-    if (position < 200) {
-      requestAnimationFrame(moveBlock);
+    if (position < 451) {
+        requestAnimationFrame(moveBox);
     }
-  }
-  moveBlock();
+}
+moveBox();
