@@ -19,15 +19,13 @@ innCheck.onclick = () => {
 
 //Задание №2
 
-let left = 0;
-function moveBox() {
-    const box = document.querySelector('.box');
-    box.style.left = `${left}px`;
-    left += 1;
-    if (left < 450) {
-        setTimeout(moveBox, 10);
+let position = 0;
+  function moveBlock() {
+    let smallBlock = document.getElementById("small-block");
+    smallBlock.style.left = `${position}px`;
+    position++;
+    if (position < 200) {
+      requestAnimationFrame(moveBlock);
     }
-}
-
-moveBox()
-
+  }
+  moveBlock();
