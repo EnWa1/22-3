@@ -28,4 +28,4 @@ function moveBox() {
         requestAnimationFrame(moveBox);
     }
 }
-moveBox();
+moveBox()
