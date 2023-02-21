@@ -1,0 +1,26 @@
+[
+  {
+    "name": "nurdin",
+    "age": 19,
+    "avatar": "icons/photo_2023-02-07_19-27-03.jpg"
+  },
+  {
+    "name": "eminem",
+    "age": 22,
+    "avatar": "https://i.pinimg.com/474x/e5/42/f2/e542f213640a56d957bf73418932e7e6.jpg"
+  },
+  {
+    "name": "kar karych",
+    "age": 77,
+    "avatar": "https://i.pinimg.com/474x/12/05/82/120582c6be31674ec4010cf1b0a45e17.jpg"
+  },
+  {
+    "name": "tyler durden",
+    "avatar": "https://i.pinimg.com/474x/20/63/b5/2063b5314dcd470811247a551cdfca78.jpg"
+  },
+  {
+    "name": "ermek",
+    "age": 15,
+    "avatar": "icons/330506903_102102742793060_2442215300916117279_n.jpg"
+  }
+]
