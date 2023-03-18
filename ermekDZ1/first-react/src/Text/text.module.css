@@ -1,0 +1,28 @@
+.block {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.gradient {
+    background-image: linear-gradient(to right, #FFC107, #FF5722);
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.gradient p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    color: #FFFFFF;
+}

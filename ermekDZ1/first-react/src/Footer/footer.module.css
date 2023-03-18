@@ -1,0 +1,45 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #f1f1f1;
+    padding: 40px 20px;
+}
+
+.footerColumn {
+    flex-basis: 33.33%;
+    text-align: center;
+}
+
+.footerColumn h3 {
+    margin-bottom: 20px;
+}
+
+.footerColumn p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.socialList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.socialList li {
+    margin: 0 10px;
+}
+
+.socialList a {
+    color: #555;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+}
+
+.socialList a:hover {
+    color: #222;
+}
