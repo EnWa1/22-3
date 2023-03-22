@@ -51,7 +51,7 @@ function App() {
     return (
         <div className="App">
             {show && (
-                <Modal handleShow={handleShow}>
+                <Modal handleShow={handleShow} handleAddTask={handleAddTask}>
                     <Input
                         name="add"
                         placeholder="Добавьте таск"
