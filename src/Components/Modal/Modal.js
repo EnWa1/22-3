@@ -1,31 +1,30 @@
-import React, { useState } from 'react'
-import classes from './modal.module.css'
-import Button from '../Button/Button'
+import React, { useState } from 'react';
+import classes from './modal.module.css';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
 
+const Modal = ({ handleShow, handleAddTask }) => {
+    const [text, setText] = useState('');
 
-const Modal = ({ handleShow }) => {
-    const [ text, setText ]  = useState();
     const handleChangeText = (textInput) => {
-        setText(textInput)
-        console.log(text, 'text');
-    }
+        setText(textInput);
+    };
+
     return (
         <React.Fragment>
-            <div className={classes.modalWrapper}></div>
+            <div className={classes.modalWrapper} onClick={handleShow} />
             <div className={classes.modalContent}>
                 <Button handleClick={handleShow}>Закрыть модалку</Button>
-                <input
-                    name='add'
-                    placeholder='Добавьте таск'
-                    onChange={(event) => handleChangeText(event.target.value)}
+                <Input
+                    name="add"
+                    placeholder="Добавьте таск"
+                    value={text}
+                    handleChange={handleChangeText}
                 />
-                <Button>Добавить таск</Button>
+                <Button handleClick={() => handleAddTask(text)}>Добавить таск</Button>
             </div>
         </React.Fragment>
-    )
-}
+    );
+};
 
-export default Modal
-
-
-/// rafce - для создание компоненты
+export default Modal;
