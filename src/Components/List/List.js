@@ -1,4 +1,3 @@
-import React from 'react';
 
 const List = ({ tasks, searchText }) => {
     const filteredTasks = tasks.filter(task => task.task.toLowerCase().includes(searchText.toLowerCase()));
