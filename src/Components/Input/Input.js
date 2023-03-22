@@ -1,14 +1,13 @@
-const Input = ({ name, placeholder, onChange }) => {
-    const handleChange = (e) => {
-        onChange(e.target.value);
-    };
 
+
+const Input = ({ name, placeholder, value, handleChange }) => {
     return (
         <input
             type="text"
             name={name}
             placeholder={placeholder}
-            onChange={handleChange}
+            value={value}
+            onChange={(event) => handleChange(event.target.value)}
         />
     );
 };
