@@ -11,10 +11,7 @@ function List({list, deleteFunc, searchTask}) {
                 <div className={classes.listInner}>
                     {item.editing && <input/>}
                     {!item.editing && <span>{item.task}</span>}
-                    
-                    {item.editing && <Button>Done</Button>}
-                    {!item.editing && <Button>Edit</Button>}
-                    <Button>Done</Button>
+                   
                     <Button clickFunc={() => deleteFunc(item.id)}>Delete</Button>
                 </div>
             </div>)}
