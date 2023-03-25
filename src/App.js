@@ -1,75 +1,77 @@
 import { useState } from 'react';
 import './App.css';
-import Modal from './сomponents/Modal/Modal';
-import Button from './сomponents/Button/Button';
-import List from './сomponents/List/List';
-import Input from './сomponents/Input/Input';
+import Modal from './components/Modal/Modal';
+import Button from './components/Button/Button';
+import List from './components/List/List';
+import Input from './components/Input/Input';
 
 function App() {
-    const [show, setShow] = useState(false);
-    const [searchText, setSearchText] = useState('');
-    const [addText, setAddText] = useState('');
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            task: 'coding',
-        },
-        {
-            id: 2,
-            task: 'eat',
-        },
-        {
-            id: 3,
-            task: 'sleep',
-        },
-    ]);
+  const defaultInputValue = "";
+  const [list, setList]  = useState([
+    {
+        id:Math.round((Math.random() * 100)) , 
+        task: 'coding',
+        completed: false,
+        editing: false
+    },
+    {
+        id:Math.round((Math.random() * 100)),
+        task: 'eat',
+        completed: false,
+        editing: false
+    },
+    {
+        id:Math.round((Math.random() * 100)),
+        task: 'sleep',
+        completed: false,
+        editing: false
+    }])
 
-    const handleShow = () => setShow(!show);
+  const [newTask, setNewTask] = useState('');
+  const changeNewTask = (e) => {
+    setNewTask(e.target.value);
+  }
 
-    const handleSearchTextChange = (event) => {
-        setSearchText(event.target.value);
-    };
+  const deleteTask = (id) => {
+    setList(list.filter(item => item.id !== id))
+  }
 
-    const handleAddTextChange = (event) => {
-        setAddText(event.target.value);
-    };
+  const [isShow, show] = useState(false);
+  function switchModal() {
+    show(!isShow);
+  }
 
-    const handleAddTask = () => {
-        const newTask = {
-            id: tasks.length + 1,
-            task: addText,
-        };
-        setTasks([...tasks, newTask]);
-        setAddText('');
-    };
+  const addNewTask = () => {
+    if(newTask && newTask !== " ") {
+      setList((prev) => [...prev, {
+        id: Math.floor(Math.random() * 100),
+        task: newTask,
+        editing: false,
+        completed: false
+      }])
+      switchModal()
+      setNewTask("")
+    }
+  }
+    
+  let [inputForState, inputChange] = useState("");
+  const updInput = (e) => {
+    inputChange((e.target.value).toLowerCase());
+    
+  }
+  return (
+    <div className="App">
+      {isShow && <Modal switchModal={switchModal} changeNewTask={changeNewTask} addNewTask={addNewTask} defaultInputValue={defaultInputValue}/>}
 
-    const handleDelete = (taskId) => {
-        const updatedTasks = tasks.filter((task) => task.id !== taskId);
-        setTasks(updatedTasks);
-    };
+      <Button clickFunc={switchModal}>
+        Add
+      </Button>
 
-    return (
-        <div className="App">
-            {show && (
-                <Modal handleShow={handleShow} handleAddTask={handleAddTask}>
-                    <Input
-                        name="add"
-                        placeholder="Добавьте таск"
-                        onChange={handleAddTextChange}
-                        value={addText}
-                    />
-                    <Button handleClick={handleAddTask}>Добавить таск</Button>
-                </Modal>
-            )}
-            <Button handleClick={handleShow}>Открыть модалку</Button>
-            <Input
-                name="search"
-                placeholder="Поиск"
-                onChange={handleSearchTextChange}
-            />
-            <List tasks={tasks} searchText={searchText} handleDelete={handleDelete} />
-        </div>
-    );
+      <Input name="search" placeholder="Search for tasks..." onChangeFunc={updInput}/>
+  
+      <List list={list} deleteFunc={deleteTask} searchTask={inputForState}/>      
+    </div>
+  );
 }
 
 export default App;

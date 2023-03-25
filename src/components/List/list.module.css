@@ -1,0 +1,30 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: space-around;
+}
+
+.listBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 15px;
+    width: 700px;
+    height: 5px;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.listBlock > span {
+    font-weight: 600;
+}
+
+.listInner {
+    display: flex;
+    justify-content: end;
+    flex-wrap: nowrap;
+    gap: 15px;
+    align-items: center;
+}
