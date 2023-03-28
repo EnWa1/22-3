@@ -1,10 +1,15 @@
-.btn {
-    width: 100px;
+.button {
+    width: 150px;
     height: 35px;
-    background-color: orange;
+    background-color: #3e8e41;
+    color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    color: whitesmoke;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
 
+.button:hover {
+    background-color: #3e8e41;
 }

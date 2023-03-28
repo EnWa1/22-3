@@ -1,76 +1,101 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Modal from './components/Modal/Modal';
 import Button from './components/Button/Button';
-import List from './components/List/List';
-import Input from './components/Input/Input';
+import TaskList from './components/TaskList/TaskList';
 
 function App() {
-  const defaultInputValue = "";
-  const [list, setList]  = useState([
+  const [ show, setShow ] = useState(false);
+  const [ newTask, setNewTask ] = useState('');
+  const [ tasks, setTasks ] = useState([
     {
-        id:Math.round((Math.random() * 100)) , 
-        task: 'coding',
-        completed: false,
-        editing: false
+      id: 1,
+      title: 'Coding',
+      completed: false
     },
     {
-        id:Math.round((Math.random() * 100)),
-        task: 'eat',
-        completed: false,
-        editing: false
+      id: 2,
+      title: 'Eat',
+      completed: false
     },
     {
-        id:Math.round((Math.random() * 100)),
-        task: 'sleep',
-        completed: false,
-        editing: false
-    }])
+      id: 3,
+      title: 'Sleep',
+      completed: false
+    },
+    {
+      id: 4,
+      title: 'Coding',
+      completed: false
+    },
 
-  const [newTask, setNewTask] = useState('');
-  const changeNewTask = (e) => {
-    setNewTask(e.target.value);
+  ])
+  const handleShow  = () => setShow(!show)
+
+  const handleChangeCheck = (event) => {
+    setNewTask(event.target.value);
+
   }
-
-  const deleteTask = (id) => {
-    setList(list.filter(item => item.id !== id))
-  }
-
-  const [isShow, show] = useState(false);
-  function switchModal() {
-    show(!isShow);
-  }
-
-  const addNewTask = () => {
-    if(newTask && newTask !== " ") {
-      setList((prev) => [...prev, {
-        id: Math.floor(Math.random() * 100),
-        task: newTask,
-        editing: false,
+  const handleAddTask = () => {
+    setTasks((prevState) => [...prevState,
+      {
+        id: Math.floor(Math.random() * 1000),
+        title: newTask,
         completed: false
-      }])
-      switchModal()
-      setNewTask("")
-    }
+      }]);
+    handleShow();
   }
-    
-  let [inputForState, inputChange] = useState("");
-  const updInput = (e) => {
-    inputChange((e.target.value).toLowerCase());
-    
+
+  const handleDelete = (id) => {
+    const deleted = tasks.filter(el => el.id !== id);
+    setTasks([...deleted])
+    /// filter
   }
+
+  const handleDone = (id) => {
+    // const currentIndex = tasks.findIndex(task => task.id === id )
+    tasks.map(task => {
+      if(task.id === id) {
+        return task.completed = !task.completed
+      }
+      return task
+    })
+    setTasks([...tasks])
+  }
+  const handleEdit = (editTodo) => {
+
+    const editList = tasks.map(task => {
+      if(task.id === editTodo.id) {
+        return editTodo
+      }
+      return task
+    })
+    setTasks([...editList])
+  }
+
+// useEffect(() => {
+//   console.log('log useEffect');
+// }, [ tasks,show ])
+
   return (
-    <div className="App">
-      {isShow && <Modal switchModal={switchModal} changeNewTask={changeNewTask} addNewTask={addNewTask} defaultInputValue={defaultInputValue}/>}
+      <div className="App">
+        {show && <Modal
+            handleChangeCheck={handleChangeCheck}
+            handleAdd={handleAddTask}
+            handleShow={handleShow}  />}
 
-      <Button clickFunc={switchModal}>
-        Add
-      </Button>
+        <Button handleClick={handleShow}>
+          Открыть модалку
+        </Button>
 
-      <Input name="search" placeholder="Search for tasks..." onChangeFunc={updInput}/>
-  
-      <List list={list} deleteFunc={deleteTask} searchTask={inputForState}/>      
-    </div>
+
+        {/* task list */}
+        <TaskList
+            handleDelete={handleDelete}
+            handleDone={handleDone}
+            handleEdit={handleEdit}
+            list={tasks} />
+      </div>
   );
 }
 
