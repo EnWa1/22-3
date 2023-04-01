@@ -1,100 +1,96 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Modal from './components/Modal/Modal';
 import Button from './components/Button/Button';
 import TaskList from './components/TaskList/TaskList';
 
 function App() {
-  const [ show, setShow ] = useState(false);
-  const [ newTask, setNewTask ] = useState('');
-  const [ tasks, setTasks ] = useState([
-    {
-      id: 1,
-      title: 'Coding',
-      completed: false
-    },
-    {
-      id: 2,
-      title: 'Eat',
-      completed: false
-    },
-    {
-      id: 3,
-      title: 'Sleep',
-      completed: false
-    },
-    {
-      id: 4,
-      title: 'Coding',
-      completed: false
-    },
+  const [show, setShow] = useState(false);
+  const [newTask, setNewTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState('all'); // добавлено состояние для фильтрации
 
-  ])
-  const handleShow  = () => setShow(!show)
+  // получение данных из localStorage и сохранение в состояние
+  useEffect(() => {
+    const savedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    setTasks(savedTasks);
+  }, []);
+
+  // сохранение данных в localStorage
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  const handleShow = () => setShow(!show);
 
   const handleChangeCheck = (event) => {
     setNewTask(event.target.value);
+  };
 
-  }
-  const handleAddTask = () => {
-    setTasks((prevState) => [...prevState,
-      {
-        id: Math.floor(Math.random() * 1000),
+  const handleAdd = () => {
+    if (newTask.trim() !== '') {
+      const newTaskObj = {
+        id: Date.now(),
         title: newTask,
-        completed: false
-      }]);
-    handleShow();
-  }
+        completed: false,
+      };
+      setTasks([...tasks, newTaskObj]);
+      setNewTask('');
+    }
+  };
 
-  const handleDelete = (id) => {
-    const deleted = tasks.filter(el => el.id !== id);
-    setTasks([...deleted])
-    /// filter
-  }
+  const handleDelete = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
 
-  const handleDone = (id) => {
-    // const currentIndex = tasks.findIndex(task => task.id === id )
-    tasks.map(task => {
-      if(task.id === id) {
-        return task.completed = !task.completed
-      }
-      return task
-    })
-    setTasks([...tasks])
-  }
-  const handleEdit = (editTodo) => {
+  const handleDone = (task) => {
+    setTasks(
+        tasks.map((t) =>
+            t.id === task.id ? { ...t, completed: !t.completed } : t
+        )
+    );
+  };
 
-    const editList = tasks.map(task => {
-      if(task.id === editTodo.id) {
-        return editTodo
-      }
-      return task
-    })
-    setTasks([...editList])
-  }
+  const handleEdit = (task) => {
+    setTasks(tasks.map((t) => (t.id === task.id ? task : t)));
+    setCurrentEdit(null);
+  };
 
-// useEffect(() => {
-//   console.log('log useEffect');
-// }, [ tasks,show ])
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const handleClearAll = () => {
+    setTasks([]);
+    localStorage.clear(); // удаление данных из localStorage
+  };
+
+  const [currentEdit, setCurrentEdit] = useState(null);
 
   return (
-      <div className="App">
-        {show && <Modal
-            handleChangeCheck={handleChangeCheck}
-            handleAdd={handleAddTask}
-            handleShow={handleShow}  />}
-
-        <Button handleClick={handleShow}>
-          Открыть модалку
-        </Button>
-
-
-        {/* task list */}
+      <div className='App'>
+        <h1>Todo App</h1>
+        <Button handleClick={handleShow}>Добавить таск</Button>
+        <select value={filter} onChange={handleFilterChange}>
+          <option value='all'>Все таски</option>
+          <option value='completed'>Выполненные</option>
+          <option value='incompleted'>Не выполненные</option>
+        </select>
+        <Button handleClick={handleClearAll}>Очистить все таски</Button>
         <TaskList
+            list={tasks}
             handleDelete={handleDelete}
             handleDone={handleDone}
             handleEdit={handleEdit}
-            list={tasks} />
+            filter={filter}
+        />
+        {show && (
+            <Modal
+                handleShow={handleShow}
+                handleChangeCheck={handleChangeCheck}
+                handleAdd={handleAdd}
+            />
+        )}
       </div>
   );
 }

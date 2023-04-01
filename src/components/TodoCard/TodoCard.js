@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classes from './todocard.module.css';
+import ButtonAction from '../ButtonAction/ButtoanAction';
 
 const TodoCard = ({
                       task,
@@ -10,42 +11,45 @@ const TodoCard = ({
                       iEdit,
                   }) => {
     const [newTitle, setNewTitle] = useState(task.title);
-    const [isEditing, setIsEditing] = useState(false);
 
-    const cardClassName = isEditing
-        ? `${classes.todoCard} ${classes.editing}`
-        : `${classes.todoCard} ${task.completed ? classes.completed : ''}`;
+    const handleCancelEdit = () => {
+        setNewTitle(task.title);
+        handleSelectCurrent(null);
+    };
 
-    if (isEditing) {
+    if (iEdit) {
         return (
-            <div className={cardClassName}>
+            <div>
                 <input
-                    name="edit"
+                    name='edit'
                     value={newTitle}
                     onChange={(event) => setNewTitle(event.target.value)}
                 />
-                <button
-                    onClick={() => {
-                        handleEdit({ ...task, title: newTitle });
-                        setIsEditing(false);
-                    }}
-                >
+                <button onClick={() => handleEdit({ ...task, title: newTitle })}>
                     Save
                 </button>
-                <button onClick={() => setIsEditing(false)}>Cancel</button>
-            </div>
-        );
-    } else {
-        return (
-            <div className={`${classes.todoCard} ${task.completed ? classes.done : ''}`}>
-                <h5>{task.title}</h5>
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-                <button onClick={() => handleDone(task.id)}>Done</button>
-                <button onClick={() => handleDelete(task.id)}>Delete</button>
+                <button onClick={handleCancelEdit}>Cancel</button>
             </div>
         );
     }
-};
 
+    return (
+        <div
+            className={classes.todoCard}
+            style={task.completed ? { textDecoration: 'line-through' } : null}
+        >
+            <div className={classes.title} onClick={() => handleSelectCurrent(task)}>
+                {task.title}
+            </div>
+            <ButtonAction
+                type='done'
+                onClick={() => handleDone(task)}
+                completed={task.completed}
+            />
+            <ButtonAction type='edit' onClick={() => handleSelectCurrent(task)} />
+            <ButtonAction type='delete' onClick={() => handleDelete(task.id)} />
+        </div>
+    );
+};
 
 export default TodoCard;
