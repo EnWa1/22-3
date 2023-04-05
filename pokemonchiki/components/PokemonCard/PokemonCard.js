@@ -21,7 +21,7 @@ const PokemonCard = ({ pokemon }) => {
     return (
         <div className='pokemonCard'>
             <div className='pokemonName'>{pokemon.name}</div>
-            <img src={pokemonData.sprites.other.dream_world.front_default} alt={pokemon.name} />
+            <img style={{width: '150px', height: '150px'}} src={pokemonData.sprites.other.dream_world.front_default} alt={pokemon.name} />
             <div className='pokemonType'>
                 {pokemonData.types.map((type) => (
                     <span key={type.type.name}>{type.type.name}</span>
