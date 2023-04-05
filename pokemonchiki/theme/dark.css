@@ -1,0 +1,6 @@
+.app.dark {
+    --background-color:#252525;
+    --text-color: #fff;
+    --card-background: #5e4d6b;
+    --box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
+}

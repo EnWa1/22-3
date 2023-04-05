@@ -1,0 +1,7 @@
+.app.light {
+    --background-color: #EDEDED;
+    --text-color: #252525;
+    --card-background: #6b7e4d;
+    --box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
