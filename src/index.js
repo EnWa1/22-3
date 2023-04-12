@@ -1,13 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </React.StrictMode>
-);
+import { GlobalContext } from 'components/Context';
+
+const userObj = {
+  name: 'Syimyk'
+}
+
+const user2 ={
+  name: 'Omurbek'
+}
+
+const signIn = (user) => {
+  console.log(user, 'user');
+}

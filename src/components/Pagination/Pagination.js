@@ -1,18 +1,18 @@
 import React from 'react'
 
 const Pagination = (
-    {pageCount,
+    {pageCount, 
         page,
-        handleNext,
-        handlePrev }
-) => {
-    return (
-        <div className='pagination'>
-            <button onClick={handlePrev}>Prev</button>
+         handleNext,
+          handlePrev }
+    ) => {
+  return (
+    <div className='pagination'>
+        <button onClick={handlePrev}>Prev</button>
             {page} / {pageCount}
             <button onClick={handleNext}>Next</button>
-        </div>
-    )
+    </div>
+  )
 }
 
 export default Pagination
