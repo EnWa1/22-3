@@ -16,7 +16,7 @@ export default function Layout() {
                 </ul>
             </nav>
             <Outlet/>
-            <footer><span>Geeks corp</span></footer>
+            <footer><span>EnWa1 tech</span></footer>
         </div>
     )
 }
