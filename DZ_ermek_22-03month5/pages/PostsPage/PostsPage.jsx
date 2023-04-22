@@ -10,7 +10,6 @@ export default function PostsPage() {
             .then(resp => setPosts(resp.data));
     }, []);
 
-    
     const handleDeletePost = (postId) => {
         API.delete(`posts/${postId}`)
             .then(resp => {
@@ -24,10 +23,10 @@ export default function PostsPage() {
         <ul>
             {posts.map(p =>
                 <li key={p.id}>
-                    <button onClick={() => handleDeletePost(p.id)}>Delete Post</button>
+                    <button onClick={() => handleDeletePost(p.id)} className="deleteButton">Delete Post</button> {/* Добавляем класс стиля кнопки */}
                     <Link to={`/posts/${p.id}`}>{p.title}</Link>
                 </li>
             )}
         </ul>
     )
-};
+}
