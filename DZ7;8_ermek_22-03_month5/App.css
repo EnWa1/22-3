@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #e5c7ffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #b6efffaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: black;
+}
+
+.MerchandiseCard {
+  background-color: #252525;
+  width: 300px;
+  height: 400px;
+  text-align: center;
+  border: 1px solid #252525;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notShow {
+  display: none;
+}
+
+.MerchandiseCard img {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  background-color: black;
+}
+
+.container{
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  width: 1400px;
+  margin: 0 auto;
+}
+
+.active {
+  color: black;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  height: 90px;
+  align-items: center;
+  background-color: #44c767;
+
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+}
